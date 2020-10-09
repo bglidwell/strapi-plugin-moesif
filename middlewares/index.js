@@ -1,11 +1,7 @@
 const moesif = require('moesif-nodejs');
 
-console.log('BACK IN CONSOLE LOG BABY')
-console.log(strapi.config.middleware.settings.moesif)
-
 const moesifMiddleware = moesif({
-  applicationId: strapi.config.middleware.settings.moesif ?
-    strapi.config.middleware.settings.moesif.appid : '',
+  applicationId: strapi.config.middleware.settings.moesif.appid,
 
   // Optional hook to link API calls to users
   identifyUser: function (req, res) {

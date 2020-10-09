@@ -1,24 +1,28 @@
 {
   "name": "strapi-plugin-moesif",
-  "version": "0.0.0",
-  "description": "This is the description of the plugin.",
+  "version": "0.0.1",
+  "description": "Adds Moesif API Analytics to Strapi application.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bglidwell/strapi-plugin-moesif.git"
+  },
   "strapi": {
     "name": "moesif",
     "icon": "plug",
-    "description": "Description of moesif plugin."
+    "description": "Adds Moesif API Analytics to Strapi application."
   },
   "dependencies": {
     "moesif-nodejs": "^3.0.0"
   },
   "author": {
-    "name": "A Strapi developer",
-    "email": "",
+    "name": "Bobby Glidwell",
+    "email": "sintex+strapi@gmail.com",
     "url": ""
   },
   "maintainers": [
     {
-      "name": "A Strapi developer",
-      "email": "",
+      "name": "Bobby Glidwell",
+      "email": "sintex+strapi@gmail.com",
       "url": ""
     }
   ],
