@@ -13,12 +13,16 @@ npm install strapi-plugin-moesif
 settings: {
   moesif: {
     enabled: true,
+    debug: false,
     applicationId: env('MOESIF_APPLICATION_ID', ''),
     identifyUser(req, res) {
       if (req.state && req.state.user) {
         return req.state.user.sub;
       }
       return undefined;
+    },
+    getSessionToken: function (req, res) {
+      return req.headers['Authorization'];
     },
     disableBatching: false,
     logBody: true,
