@@ -13,7 +13,18 @@ npm install strapi-plugin-moesif
 settings: {
   moesif: {
     enabled: true,
-    appid: env('MOESIF_APPLICATION_ID', '')
+    applicationId: 'Your Moesif Application Id',
+    identifyUser(req, res) {
+      if (req.state && req.state.user) {
+        return req.state.user.sub;
+      }
+      return undefined;
+    },
+    disableBatching: false,
+    logBody: true,
+    callback: function (error, data) {
+      console.log('Moesif error: ' + JSON.stringify(error));
+    }
   }
 }
 ```
