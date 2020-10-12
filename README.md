@@ -17,7 +17,7 @@ settings: {
     applicationId: env('MOESIF_APPLICATION_ID', ''),
     identifyUserL function (req, res) {
       if (req.state && req.state.user) {
-        return req.state.user.sub;
+        return req.state.user.id;
       }
       return undefined;
     },
