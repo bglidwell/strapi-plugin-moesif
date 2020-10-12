@@ -8,14 +8,14 @@ https://www.moesif.com/
 ```
 npm install strapi-plugin-moesif
 ```
-- Add the following to ./middlewares.js
+- Add the following to ./config/middlewares.js
 ```
 settings: {
   moesif: {
     enabled: true,
     debug: false,
     applicationId: env('MOESIF_APPLICATION_ID', ''),
-    identifyUser(req, res) {
+    identifyUserL function (req, res) {
       if (req.state && req.state.user) {
         return req.state.user.sub;
       }

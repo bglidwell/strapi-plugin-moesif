@@ -6,7 +6,7 @@ module.exports = strapi => {
   return {
     // can also be async
     initialize() {
-      strapi.app.use(moesifMiddleware);;
+      strapi.app.use(moesifMiddleware);
     },
   };
 };
