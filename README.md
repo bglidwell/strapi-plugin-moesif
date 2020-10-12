@@ -35,5 +35,5 @@ settings: {
 - Add MOESIF_APPLICATION_ID to your environment variables
 
 ## Heroku
-If using Heroku, simply install the Moesif application as an add on to your server, the MOESIF_APPLICATION_ID veriable will be automatically created and managed by Heroku. 
+If using Heroku, simply install the Moesif application as an add-on. The MOESIF_APPLICATION_ID environment variable will be automatically created and managed by Heroku. 
 
