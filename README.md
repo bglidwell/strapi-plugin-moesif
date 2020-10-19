@@ -15,14 +15,11 @@ settings: {
     enabled: true,
     debug: false,
     applicationId: env('MOESIF_APPLICATION_ID', ''),
-    identifyUserL function (req, res) {
+    identifyUser: function (req, res) {
       if (req.state && req.state.user) {
         return req.state.user.id;
       }
       return undefined;
-    },
-    getSessionToken: function (req, res) {
-      return req.headers['Authorization'];
     },
     disableBatching: false,
     logBody: true,
