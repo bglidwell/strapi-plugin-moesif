@@ -12,7 +12,7 @@
     "description": "Adds Moesif API Analytics to Strapi application."
   },
   "dependencies": {
-    "moesif-nodejs": "^3.1.4"
+    "moesif-nodejs": "^3.1.5"
   },
   "author": {
     "name": "Bobby Glidwell",
