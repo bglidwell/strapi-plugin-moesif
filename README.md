@@ -76,3 +76,7 @@ identifyUser: function (req, res) {
   return undefined;
 }
 ```
+
+## Credits
+
+This plugin was originally created by [Bobby Glidwell](https://github.com/bglidwell/strapi-plugin-moesif)
