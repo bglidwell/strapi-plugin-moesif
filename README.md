@@ -1,48 +1,78 @@
 # Strapi plugin moesif
 
-Plugin to add Moesif API Analytics and Monitoring to Strapi!
-https://www.moesif.com/
+Plugin to add [Moesif API Analytics](https://www.moesif.com/) and Monitoring to [Strapi](https://strapi.io/)!
 
 ## Installation
-- Install the plugin
+
+1. Install the plugin
+  
+```bash
+npm install --save strapi-plugin-moesif
 ```
-npm install strapi-plugin-moesif
-```
-- Add the following to ./config/middlewares.js
-```
-const hash = require('crypto-js/md5');
+
+2. Add a Moesif to your middleware file `./config/middleware.js`
+  
+```javascript
 module.exports = ({env}) => ({
-  settings: {
-    moesif: {
-      enabled: true,
-      debug: false,
-      applicationId: env('MOESIF_APPLICATION_ID', ''),
-      identifyUser: function (req, res) {
-        if (req.state && req.state.user) {
-          return req.state.user.id;
-        }
-        return undefined;
+    settings: {
+      load: {
+        before: ["moesif"],
+        order: ["moesif"],
       },
-      getSessionToken: function (req, res) {
-        // your code here, must return a string.
-        return hash(req.headers['Authorization']).toString();
-      },
-      maskContent: function(event) {
-        // remove any field that you don't want to be sent to Moesif.
-        event.request.headers['Authorization'] = hash(event.request.headers['Authorization']).toString(); 
-        return event;
-      },
-      disableBatching: false,
-      logBody: true,
-      callback: function (error, data) {
-        console.log('Moesif error: ' + JSON.stringify(error));
+      moesif: {
+        enabled: true,
+        debug: false,
+        applicationId: env('MOESIF_APPLICATION_ID', ''),
+        identifyUser: function (req, res) {
+          if (req.state && req.state.user) {
+            return String(req.state.user.id);
+          }
+          return undefined;
+        },
+        skip: function (req, res) {
+            // don't log non JSON types
+            return res.headers && !res.headers['Content-Type'].includes('application'); 
+        },
+        disableBatching: false,
+        logBody: true,
+        debug: false
       }
     }
-  }
-});
+  });
 ```
-- Add MOESIF_APPLICATION_ID to your environment variables
+
+Add MOESIF_APPLICATION_ID to your environment variables
+Your Moesif Application Id can be found in the [_Moesif Portal_](https://www.moesif.com/).
+After signing up for a Moesif account, your Moesif Application Id will be displayed during the onboarding steps. 
+
+3. Run Strapi
+
+```bash
+npm run develop
+```
+
+Make a few API calls to your resources like so:
+
+```bash
+curl `http://localhost:1337`
+```
 
 ## Heroku
 If using Heroku, simply install the Moesif application as an add-on. The MOESIF_APPLICATION_ID environment variable will be automatically created and managed by Heroku. 
 
+## Configuration options
+
+Because this plugin uses `moesif-nodejs` under the hood, all of the [configuration options for moesif-nodejs](https://www.moesif.com/docs/server-integration/nodejs/#configuration-options) are supported by this plugin also. 
+
+### identifyUser
+
+To track Strapi users, we recommend setting the `identifyUser` with the following code:
+
+```javascript
+identifyUser: function (req, res) {
+  if (req.state && req.state.user) {
+    return String(req.state.user.id);
+  }
+  return undefined;
+}
+```
