@@ -2,6 +2,6 @@
 
 const middlewares = require("./middlewares");
 
-module.exports = () => ({
+module.exports = {
   middlewares,
-});
+};
