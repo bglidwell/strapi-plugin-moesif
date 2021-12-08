@@ -1,3 +1,7 @@
 "use strict";
 
-module.exports = require("./server");
+const middlewares = require("./middlewares");
+
+module.exports = () => ({
+  middlewares,
+});
