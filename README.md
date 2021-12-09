@@ -1,5 +1,7 @@
 # Strapi plugin moesif
 
+## **WARNING** (Breaking Changes):  >2.0.0 only supports Strapi v4 and above. For Strapi v3 support, use >1.0.5
+
 Plugin to add [Moesif API Analytics](https://www.moesif.com/) and Monitoring to [Strapi](https://strapi.io/)!
 
 ## Installation
@@ -9,36 +11,35 @@ Plugin to add [Moesif API Analytics](https://www.moesif.com/) and Monitoring to 
 ```bash
 npm install --save strapi-plugin-moesif
 ```
+2. Enable the plugin `./config/plugins.js`
+```javascript
+module.exports = {
+  'strapi-plugin-moesif': {
+    enabled: true,
+    config: {
+      moesif: {
+        //custom config passed to moesif middleware goes here
+      }
+    },
+  },
+}
+```
 
-2. Add a Moesif to your middleware file `./config/middleware.js`
+3. Add Moesif to your middleware array `./config/middleware.js`
   
 ```javascript
-module.exports = ({env}) => ({
-    settings: {
-      load: {
-        before: ["moesif"],
-        order: ["moesif"],
-      },
-      moesif: {
-        enabled: true,
-        debug: false,
-        applicationId: env('MOESIF_APPLICATION_ID', ''),
-        identifyUser: function (req, res) {
-          if (req.state && req.state.user) {
-            return String(req.state.user.id);
-          }
-          return undefined;
-        },
-        skip: function (req, res) {
-            // don't log non JSON types
-            return res.headers && !res.headers['Content-Type'].includes('application'); 
-        },
-        disableBatching: false,
-        logBody: true,
-        debug: false
-      }
-    }
-  });
+module.exports = [
+  'strapi::errors',
+  'strapi::security',
+  'strapi::cors',
+  'strapi::poweredBy',
+  'strapi::logger',
+  'strapi::query',
+  'strapi::body',
+  'strapi::favicon',
+  'strapi::public',
+  'plugin::strapi-plugin-moesif.moesif'
+];
 ```
 
 Add MOESIF_APPLICATION_ID to your environment variables
@@ -47,8 +48,14 @@ After signing up for a Moesif account, your Moesif Application Id will be displa
 
 3. Run Strapi
 
+npm
 ```bash
 npm run develop
+```
+
+yarn 
+```bash
+yarn develop
 ```
 
 Make a few API calls to your resources like so:
@@ -66,7 +73,7 @@ Because this plugin uses `moesif-nodejs` under the hood, all of the [configurati
 
 ### identifyUser
 
-To track Strapi users, we recommend setting the `identifyUser` with the following code:
+To track Strapi users, we set the `identifyUser` function by default:
 
 ```javascript
 identifyUser: function (req, res) {
