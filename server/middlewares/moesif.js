@@ -3,7 +3,8 @@
 const moesif = require("moesif-nodejs");
 
 module.exports = (options, { strapi }) => {
-  const moesifMiddleware = moesif(options);
+  const moesifConfig = strapi.plugin("strapi-plugin-moesif").config("moesif");
+  const moesifMiddleware = moesif(moesifConfig);
 
   return moesifMiddleware;
 };
