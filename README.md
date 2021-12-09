@@ -1,6 +1,6 @@
 # Strapi plugin moesif
 
-## **WARNING** (Breaking Changes):  >2.0.0 only supports Strapi v4 and above. For Strapi v3 support, use >1.0.5
+## **WARNING** (Breaking Changes):  ^2.0.0 only supports Strapi v4 and above. For Strapi v3 support, use ^1.0.5
 
 Plugin to add [Moesif API Analytics](https://www.moesif.com/) and Monitoring to [Strapi](https://strapi.io/)!
 
