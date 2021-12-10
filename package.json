@@ -8,7 +8,7 @@
   },
   "strapi": {
     "displayName": "Moesif",
-    "name": "moesif",
+    "name": "strapi-plugin-moesif",
     "description": "Adds Moesif API Analytics to Strapi application.",
     "kind": "plugin"
   },
