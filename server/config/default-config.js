@@ -10,7 +10,7 @@ module.exports = ({ env }) => ({
     skip: function (req, res) {
       // don't log non JSON types
       return (
-        res.headers && !res.headers["Content-Type"].includes("application")
+        res.headers && !res.headers["Content-Type"].includes("application/json")
       );
     },
     debug: false,
