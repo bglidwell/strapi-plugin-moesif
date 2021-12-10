@@ -7,9 +7,10 @@
     "url": "https://github.com/moesif/strapi-plugin-moesif.git"
   },
   "strapi": {
+    "displayName": "Moesif",
     "name": "moesif",
-    "icon": "plug",
-    "description": "Adds Moesif API Analytics to Strapi application."
+    "description": "Adds Moesif API Analytics to Strapi application.",
+    "kind": "plugin"
   },
   "dependencies": {
     "moesif-nodejs": "^3.1.16"
@@ -27,7 +28,7 @@
     }
   ],
   "engines": {
-    "node": ">=10.0.0",
+    "node": ">=12.x.x <=16.x.x",
     "npm": ">=6.0.0"
   },
   "license": "MIT"
