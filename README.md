@@ -84,6 +84,26 @@ identifyUser: function (req, res) {
 }
 ```
 
+### skip
+
+Moesif can be setup to track all traffic in and out of your application, but usually the interest is in API metrics specifically. The default configuration of this plugin skips all non-JSON communication to avoid having tons of file requests in your Moesif dashboard. 
+
+To override the skip function, simple include one in your config, or set to  to send all communications:
+
+```javascript
+// return true if the data should be skipped
+skip: function (req, res) {
+  // don't log non JSON types
+  return (
+    res.headers && !res.headers["Content-Type"].includes("application/json")
+  );
+}
+
+//send all data regardless of type
+skip: null
+```
+
+
 ## Credits
 
 This plugin was originally created by [Bobby Glidwell](https://github.com/bglidwell/strapi-plugin-moesif)
