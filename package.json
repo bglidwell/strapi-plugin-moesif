@@ -1,6 +1,6 @@
 {
   "name": "strapi-plugin-moesif",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "Adds Moesif API Analytics to Strapi application.",
   "repository": {
     "type": "git",
